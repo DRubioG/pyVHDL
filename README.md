@@ -3,12 +3,12 @@
 
 El funcionamiento de la libreria se basa en almacenar las cosas en listas de la siguiente manera:
  - Library
- libraries=[[<libreria> ], [...]]
+ libraries=[["libreria" ], [...]]
  - use
- uses=[[<nombre>, <tipo>, <cantidad>],[...]]
+ uses=[["nombre", "tipo", "cantidad"],[...]]
  - port_in
- inPorts=[[<nombre>, <tipo>, <MSB>, <LSB>], [...]]
+ inPorts=[["nombre", "tipo", "MSB", "LSB"], [...]]
 - port_out
-outPorts=[[<nombre>, <tipo>, <MSB>, <LSB>], [...]]
+outPorts=[["nombre", "tipo", "MSB", "LSB"], [...]]
 - signal
-signals=[[<nombre>, <tipo>, <MSB>, <LSB>],[...]]
+signals=[["nombre", "tipo", "MSB", "LSB"],[...]]
