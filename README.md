@@ -23,14 +23,10 @@ Este método permite incluir librerias al proyecto. La librería _IEEE_ ya está
 Este método permite incluir _uses_ al proyecto. El _use_ std_logic_1164 de la librería _IEEE_ ya está incluido en el proyecto
 - *port_in*(\<puertos_de_entrada\>, \<bits\>, \<MSB\>, \<LSB\>, \<invert\>, \<type\>)
 Este método permite incluir puertos de entrada en el proyecto.
-
     - **_bits_**: permite elegir el número de bits que tendrá la cadena
     - **_MSB_**: permite elegir el bit de más peso
-
     - **_LSB_**: permite elegir el bit de menor peso
-
     - **_invert_**: permite elegir el sentido de los bits
-
     - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
