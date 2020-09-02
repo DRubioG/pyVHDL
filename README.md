@@ -25,17 +25,20 @@ _bits_: permite elegir el número de bits que tendrá la cadena
 _MSB_: permite elegir el bit de más peso
 _LSB_: permite elegir el bit de menor peso
 _invert_: permite elegir el sentido de los bits
-_type_: permite elegir el tipo de los datos. El tipo por defecto es _std_logic(_vector)
+_type_: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
 Ejemplo:
+``` python
 port_in("puerto_entrada1")
 port_in("puerto_entrada2", 23)
 port_in("puerto_entrada3", 23, invert=1)
 port_in("puerto_entrada4", bits=4, LSB=2)
-
+```
 Equivalente:
+``` vhdl
 port(
     puerto_entrada1 : in std_logic;
     puerto_entrada2 : in std_logic_vector(22 downto 0);
     puerto_entrada3 : in std_logic_vector(0 to 22);
     puerto_entrada4 : in std_logic_vector(6 downto 2)
 )
+```
