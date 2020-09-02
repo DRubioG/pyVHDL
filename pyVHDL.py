@@ -101,7 +101,7 @@ compondrán el fichero vhdl
             invert : para invertir el orden de los bits
                 '0': para orden descente
                 '1': para orden ascendente
-            type : tipo de los datos
+            type : tipo de los datos, por defecto std_logic
         '''
         if type is None:
             if bits==0:
@@ -124,7 +124,7 @@ compondrán el fichero vhdl
             invert : para invertir el orden de los bits
                 '0': para orden descente
                 '1': para orden ascendente
-            type : tipo de los datos
+            type : tipo de los datos, por defecto std_logic
         '''
         if type is None:
             if bits==0:
@@ -147,7 +147,7 @@ compondrán el fichero vhdl
             invert : para invertir el orden de los bits
                 '0': para orden descente
                 '1': para orden ascendente
-            type : tipo de los datos
+            type : tipo de los datos, por defecto std_logic
         '''
         if type is None:
             if bits==0:
@@ -170,7 +170,7 @@ compondrán el fichero vhdl
             invert : para invertir el orden de los bits
                 '0': para orden descente
                 '1': para orden ascendente
-            type : tipo de los datos
+            type : tipo de los datos, por defecto std_logic
         '''
         if type is None:
             if bits==0:
