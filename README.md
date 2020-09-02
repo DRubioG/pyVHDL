@@ -17,7 +17,8 @@ signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
 
 
 ## Funciones
-- *_library_*(\<libreria\>)
+- *library*(\<libreria\>)
+
 Este método permite incluir librerias al proyecto. La librería _IEEE_ ya está incluida en el proyecto
 - *_use_*(\<use\>)
 Este método permite incluir _uses_ al proyecto. El _use_ std_logic_1164 de la librería _IEEE_ ya está incluido en el proyecto
