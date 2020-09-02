@@ -12,3 +12,9 @@ El funcionamiento de la libreria se basa en almacenar las cosas en listas de la 
 outPorts=[["nombre", "tipo", "MSB", "LSB"], [...]]
 - signal
 signals=[["nombre", "tipo", "MSB", "LSB"],[...]]
+
+
+## Funciones
+- library(\<libreria\>)
+- use("use")
+- port_in("puertos de entrada")

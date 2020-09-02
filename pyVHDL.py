@@ -11,6 +11,7 @@ class pyVHDL:
         self.outPorts=[]
         self.generics=[]
         self.constants=[]
+        self.inoutPorts=[]
 
     def library(self, library=None):
         if library is not None:
@@ -20,7 +21,7 @@ class pyVHDL:
         if use is not None:
             self.uses.append([use, library, count])
     
-    def list_ports(self,input, output, bits, MSB, LSB, invert, type):
+    def list_ports(self ,input, output, bits, MSB, LSB, invert, type):
         if invert==0:
             if bits ==0:
                 MSB_l=MSB
@@ -61,10 +62,29 @@ class pyVHDL:
                 type="std_logic"
             elif bits>0:
                 type="std_logic_vector"
+        elif type == "u":
+            type="unsigned"
         self.list_ports(port, self.inPorts, bits, MSB, LSB, invert, type)
         
-    def port_out(self, port=None, bits=0, MSB=0, LSB=0, invert=0, type="std_logic"):
+    def port_out(self, port=None, bits=0, MSB=0, LSB=0, invert=0, type=None):
+        if type is None:
+            if bits==0:
+                type="std_logic"
+            elif bits>0:
+                type="std_logic_vector"
+        elif type == "u":
+            type="unsigned"
         self.list_ports(port, self.outPorts, bits, MSB, LSB, invert, type)
+
+    def port_inout(self, port=None, bits=0, MSB=0, LSB=0, invert=0, type=None):
+        if type is None:
+            if bits==0:
+                type="std_logic"
+            elif bits>0:
+                type="std_logic_vector"
+        elif type == "u":
+            type="unsigned"
+        self.list_ports(port, self.inoutPorts, bits, MSB, LSB, invert, type)
 
     def signal(self, signal=None, bits=0, MSB=0, LSB=0, invert=0, type="std_logic"):
         self.list_ports(signal, self.signals, bits, MSB, LSB, invert, type)
@@ -77,17 +97,18 @@ class pyVHDL:
 
 if __name__=="__main__":
     v=pyVHDL("PWM_generator.vhd")
-    #v.li   brary("ieee") ###libreria por defecto
+    #v.library("ieee") ###libreria por defecto
     #v.use("std_logic_1164") ###libreria por defecto
     v.use("numeric_std")
+    print(v.uses)
     v.port_in("rst")
     v.port_in("clk")
-    v.port_in("periodo",MSB=25, type="unsigned")
+    v.port_in("periodo",MSB=25, type="u")
     v.port_in("ciclo_trabajo", 23)
     v.port_out("pwm")
     v.port_out("final_pwm")
-    print(v.inPorts)
-    print(v.outPorts)
+    print("Puertos de entrada: ", v.inPorts)
+    print("Puertos de salida: ", v.outPorts)
     v.signal("senal_portadora", 23) 
     v.signal("final_pwm_int")
-    print(v.signals)
+    print("Signals", v.signals)
