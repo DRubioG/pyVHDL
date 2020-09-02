@@ -25,15 +25,15 @@ Este método permite incluir _uses_ al proyecto. El _use_ std_logic_1164 de la l
 
 Este método permite incluir puertos de entrada en el proyecto.
 
-**_bits_**: permite elegir el número de bits que tendrá la cadena
+    - **_bits_**: permite elegir el número de bits que tendrá la cadena
 
-**_MSB_**: permite elegir el bit de más peso
+    - **_MSB_**: permite elegir el bit de más peso
 
-**_LSB_**: permite elegir el bit de menor peso
+    - **_LSB_**: permite elegir el bit de menor peso
 
-**_invert_**: permite elegir el sentido de los bits
+    - **_invert_**: permite elegir el sentido de los bits
 
-**_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
+    - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
 
