@@ -10,13 +10,14 @@ El funcionamiento de la libreria se basa en almacenar las cosas en listas de la 
  inPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 - port_out
 outPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB"], [...]]
+- port_inout
+inoutPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB"], [...]]
 - signal
 signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
 
 
 ## Funciones
 - _library_(\<libreria\>)
-
 Este método permite incluir librerias al proyecto. La librería _IEEE_ ya está incluida en el proyecto
 - _use_(\<use\>)
 
