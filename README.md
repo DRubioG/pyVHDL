@@ -24,9 +24,7 @@ Este método permite incluir _uses_ al proyecto. El _use_ std_logic_1164 de la l
 - *port_in*(\<puertos_de_entrada\>, \<bits\>, \<MSB\>, \<LSB\>, \<invert\>, \<type\>)
 
 Este método permite incluir puertos de entrada en el proyecto.
-
     - **_bits_**: permite elegir el número de bits que tendrá la cadena
-
     - **_MSB_**: permite elegir el bit de más peso
 
     - **_LSB_**: permite elegir el bit de menor peso
