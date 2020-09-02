@@ -3,7 +3,7 @@
 
 El funcionamiento de la libreria se basa en almacenar las cosas en listas de la siguiente manera:
  - Library
- libraries=[["libreria" ], [...]]
+ libraries=[[\<libreria\>], [...]]
  - use
  uses=[["nombre", "tipo", "cantidad"],[...]]
  - port_in
