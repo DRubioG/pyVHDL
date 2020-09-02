@@ -9,9 +9,9 @@ El funcionamiento de la libreria se basa en almacenar las cosas en listas de la 
  - port_in
  inPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 - port_out
-outPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB"], [...]]
+outPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 - port_inout
-inoutPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB"], [...]]
+inoutPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 - signal
 signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
 
@@ -27,6 +27,8 @@ Este método permite incluir puertos de entrada en el proyecto.
     - **_MSB_**: permite elegir el bit de más peso
     - **_LSB_**: permite elegir el bit de menor peso
     - **_invert_**: permite elegir el sentido de los bits
+        - '0': para orden descente
+        - '1': para orden ascendente
     - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
@@ -36,6 +38,8 @@ Este método permite incluir puertos de salida en el proyecto.
     - **_MSB_**: permite elegir el bit de más peso
     - **_LSB_**: permite elegir el bit de menor peso
     - **_invert_**: permite elegir el sentido de los bits
+        - '0': para orden descente
+        - '1': para orden ascendente
     - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
@@ -45,6 +49,8 @@ Este método permite incluir puertos de entrada\salida en el proyecto.
     - **_MSB_**: permite elegir el bit de más peso
     - **_LSB_**: permite elegir el bit de menor peso
     - **_invert_**: permite elegir el sentido de los bits
+        - '0': para orden descente
+        - '1': para orden ascendente
     - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
@@ -54,6 +60,8 @@ Este método permite incluir señales en el proyecto.
     - **_MSB_**: permite elegir el bit de más peso
     - **_LSB_**: permite elegir el bit de menor peso
     - **_invert_**: permite elegir el sentido de los bits
+        - '0': para orden descente
+        - '1': para orden ascendente
     - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
