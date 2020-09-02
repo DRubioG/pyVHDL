@@ -33,6 +33,10 @@ Este método permite incluir puertos de entrada en el proyecto.
 
 ## Ejemplo:
 ``` python
+import pyVHDL
+
+v=pyVHDL("Prueba.vhd")
+v.use("numeric_std")
 port_in("puerto_entrada1")
 port_in("puerto_entrada2", 23)
 port_in("puerto_entrada3", 23, invert=1)
@@ -40,10 +44,16 @@ port_in("puerto_entrada4", bits=4, LSB=2)
 ```
 Equivalente:
 ``` vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Prueba is
 port(
     puerto_entrada1 : in std_logic;
     puerto_entrada2 : in std_logic_vector(22 downto 0);
     puerto_entrada3 : in std_logic_vector(0 to 22);
     puerto_entrada4 : in std_logic_vector(6 downto 2)
-)
+);
+
+end Prueba;
 ```
