@@ -17,10 +17,9 @@ signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
 
 
 ## Funciones
-- _library_(\<libreria\>)
+- *_library_*(\<libreria\>)
 Este método permite incluir librerias al proyecto. La librería _IEEE_ ya está incluida en el proyecto
-- _use_(\<use\>)
-
+- *_use_*(\<use\>)
 Este método permite incluir _uses_ al proyecto. El _use_ std_logic_1164 de la librería _IEEE_ ya está incluido en el proyecto
 - *port_in*(\<puertos_de_entrada\>, \<bits\>, \<MSB\>, \<LSB\>, \<invert\>, \<type\>)
 Este método permite incluir puertos de entrada en el proyecto.
