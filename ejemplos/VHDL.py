@@ -36,7 +36,7 @@ class VHDL:
         return self.uses
 
     def signal(self, signal=None):
-        self.add(signal, self.signals)
+        self.add(signal, self.signals)  
         return self.signals
     
     def nameVHDL(self, name=None):
