@@ -5,16 +5,31 @@ El funcionamiento de la libreria se basa en almacenar las cosas en listas de la 
  - Library
  libraries=[[\<libreria\>], [...]]
  - use
- uses=[["nombre", "tipo", "cantidad"],[...]]
+ uses=[[\<nombre\>, \<tipo\>, \<cantidad\>],[...]]
  - port_in
- inPorts=[["nombre", "tipo", "MSB", "LSB"], [...]]
+ inPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 - port_out
-outPorts=[["nombre", "tipo", "MSB", "LSB"], [...]]
+outPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB"], [...]]
 - signal
-signals=[["nombre", "tipo", "MSB", "LSB"],[...]]
+signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
 
 
 ## Funciones
 - library(\<libreria\>)
-- use("use")
-- port_in("puertos de entrada")
+Este método permite incluir librerias al proyecto. La librería _IEEE_ ya está incluida en el proyecto
+- use(\<use\>)
+Este método permite incluir _uses_ al proyecto. El _use_ std_logic_1164 de la librería _IEEE_ ya está incluido en el proyecto
+- port_in(\<puertos de entrada\>, \<bits\>, \<MSB\>, \<LSB\>, \<invert\>, \<type\>)
+Este método permite incluir puertos de entrada en el proyecto. Ejemplo:
+port_in("puerto_entrada1")
+port_in("puerto_entrada2", 23)
+port_in("puerto_entrada3", 23, invert=1)
+port_in("puerto_entrada4", bits=4, LSB=2)
+
+Equivalente:
+port(
+    puerto_entrada1 : in std_logic;
+    puerto_entrada2 : in std_logic_vector(22 downto 0);
+    puerto_entrada3 : in std_logic_vector(0 to 22);
+    puerto_entrada4 : in std_logic_vector(6 downto 2)
+)
