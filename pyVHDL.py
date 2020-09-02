@@ -86,7 +86,14 @@ class pyVHDL:
             type="unsigned"
         self.list_ports(port, self.inoutPorts, bits, MSB, LSB, invert, type)
 
-    def signal(self, signal=None, bits=0, MSB=0, LSB=0, invert=0, type="std_logic"):
+    def signal(self, signal=None, bits=0, MSB=0, LSB=0, invert=0, type=None):
+        if type is None:
+            if bits==0:
+                type="std_logic"
+            elif bits>0:
+                type="std_logic_vector"
+        elif type == "u":
+            type="unsigned"
         self.list_ports(signal, self.signals, bits, MSB, LSB, invert, type)
 
     def constant(self, constant=None):
