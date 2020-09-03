@@ -204,6 +204,9 @@ compondrán el fichero vhdl
         self.architecture=name
         return self.architecture
 
+    def constant(self, name, bits, value, type="unsigned"):
+        self.constants.append([name, type, bits, value])
+
     #Convertir el codigo VHDL
     def conv_library(self):
         wLib=""
@@ -294,6 +297,17 @@ compondrán el fichero vhdl
         wGen+="\n);"
         return wGen
 
+    def conv_constant(self):
+        wCons=""
+        for i in range(len(self.constants)):
+            wCons+="\nconstant "+ self.constants[i][0] + " : " + self.constants[i][1]
+            if self.constants[i][2] >0:
+                wCons+="(" + str(self.constants[i][2]-1) + " downto 0)"
+            wCons+=" := "
+            if self.constants[i][1] == "unsigned":
+                wCons+="to_unsigned("+ str(self.constants[i][3]) + ", " + str(self.constants[i][2]) + ");"
+        return wCons
+
     def conv_entity(self):
         if self.entity is None:
             self.nameVHDL()
@@ -301,7 +315,7 @@ compondrán el fichero vhdl
         return wEntity
 
     def conv_architecture(self):
-        wArch="architecture " + self.architecture + " of " + self.entity +  " is " + self.conv_signal()+ "\nbegin" + "\nend architecture;"
+        wArch="architecture " + self.architecture + " of " + self.entity +  " is " + self.conv_signal()+  self.conv_constant()+ "\nbegin" + "\nend architecture;"
         return wArch
 
     def conv_VHDL(self):
@@ -319,6 +333,7 @@ if __name__=="__main__":
     v.port_in("clk")
     v.port_out("pwm")
     v.port_inout("final_pwm")
+    v.constant("cero", 23, 0)
     v.signal("senal_portadora", 23) 
     v.signal("final_pwm_int")
     print(v.conv_VHDL())

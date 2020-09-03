@@ -16,6 +16,8 @@ inoutPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
 - generic
 generics=[[\<nombre\>, \<tipo\>, \<valor\>], [...]]
+- constant
+constants=[[\<valor\>, \<tipo\>, \<bits\>, \<valor\>],[...]]
 
 ## Funciones
 - *library(\<libreria\>)*: 
@@ -71,6 +73,12 @@ Este método permite incluir en los genéricos en el proyeto
     - **_tipo_**: permite elegir el tipo del genérico, por defecto es _integer_
     - **_valor_**: el valor del generico, es opcional
 
+- *constant(\<constante\>, \<bits\>, \<valor\>, \<tipo\>)
+Este método permite incluir las constantes al proyecto
+    - **_bits_**: el número de bits que tendrá la constante
+    - **_valor_**: el valor de la constante
+    - **_tipo_**: el tipo de la constante, el tipo por defecto es _unsigned_
+
 ## Ejemplo:
 ``` python
 import pyVHDL
@@ -83,6 +91,7 @@ v.port_in("puerto_entrada3", 23, invert=1)
 v.port_in("puerto_entrada4", bits=4, LSB=2)
 v.port_out("puerto_salida")
 v.port_inout("puerto_entrada_salida")
+v.constant("cero", 23, 0)
 v.signal("senal", 8)
 ```
 Equivalente:
@@ -108,6 +117,7 @@ end Prueba;
 
 architecture arch_Prueba of Prueba is
 signal senal : std_logic_vector(7 downto 0);
+constant cero : unsigned(22 downto 0) := to_unsigned(0, 23);
 begin
 
 
