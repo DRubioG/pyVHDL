@@ -182,6 +182,9 @@ compondrán el fichero vhdl
             type="unsigned"
         self.list_ports(signal, self.signals, bits, MSB, LSB, invert, type)
 
+    def generic(self, constant, type="integer", value=None):
+        self.generics.append([constant, type, value])
+
     def nameVHDL(self, name=None):
         if name is None:
             name=self.name
@@ -215,7 +218,7 @@ compondrán el fichero vhdl
         return wUse
 
     def conv_ports(self):
-        wPort="port("
+        wPort="\nport("
         lonEnt=len(self.inPorts)
         lonSal=len(self.outPorts)
         lonEntSal=len(self.inoutPorts)
@@ -278,10 +281,23 @@ compondrán el fichero vhdl
                 wSignal=wSignal+";"
         return wSignal
 
+    def conv_generic(self):
+        if self.generics is not None:
+            wGen="generic("
+            lonGen=len(self.generics)
+            for i in range(len(self.generics)):
+                wGen+="\n\t" +self.generics[i][0]+ " : " + self.generics[i][1] 
+                if self.generics[i][2] is not None:
+                   wGen+=" := "+str(self.generics[i][2])
+                if i < lonGen-1:
+                    wGen+=";"
+        wGen+="\n);"
+        return wGen
+
     def conv_entity(self):
         if self.entity is None:
             self.nameVHDL()
-        wEntity="entity "+ self.entity + " is\n"  + self.conv_ports() + "\nend entity " + self.entity +";\n"
+        wEntity="entity "+ self.entity + " is\n"  + self.conv_generic() + self.conv_ports() + "\nend entity " + self.entity +";\n"
         return wEntity
 
     def conv_architecture(self):
@@ -289,13 +305,14 @@ compondrán el fichero vhdl
         return wArch
 
     def conv_VHDL(self):
-        wVHDL=self.conv_library()+self.conv_uses()+self.conv_entity()+self.conv_architecture()
+        wVHDL=self.conv_library()+self.conv_uses()+self.conv_entity()+"\n"+self.conv_architecture()
         return wVHDL
 
 
 if __name__=="__main__":
     v=pyVHDL("PWM_generator.vhd")
     v.use("numeric_std")
+    v.generic("hola")
     v.port_in("rst")
     v.port_in("periodo",MSB=25, type="u")
     v.port_in("ciclo_trabajo", 23)
@@ -304,6 +321,4 @@ if __name__=="__main__":
     v.port_inout("final_pwm")
     v.signal("senal_portadora", 23) 
     v.signal("final_pwm_int")
-    v.nameVHDL("hola")
-    v.nameArchitecture("Pasando")
     print(v.conv_VHDL())

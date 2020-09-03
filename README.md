@@ -14,7 +14,8 @@ outPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 inoutPorts=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>], [...]]
 - signal
 signals=[[\<nombre\>, \<tipo\>, \<MSB\>, \<LSB\>],[...]]
-
+- generic
+generics=[[\<nombre\>, \<tipo\>, \<valor\>], [...]]
 
 ## Funciones
 - *library(\<libreria\>)*: 
@@ -65,17 +66,23 @@ Este método permite incluir señales en el proyecto.
     - **_type_**: permite elegir el tipo de los datos. El tipo por defecto es **_std_logic(_vector)**
     El tipo 'u' --> "unsigned"
 
+- *generic(\<generic\>, \<tipo\>="integer", \<valor\>)*:
+Este método permite incluir en los genéricos en el proyeto
+    - **_tipo_**: permite elegir el tipo del genérico, por defecto es _integer_
+    - **_valor_**: el valor del generico, es opcional
+
 ## Ejemplo:
 ``` python
 import pyVHDL
 v=pyVHDL("Prueba.vhd")
 v.use("numeric_std")
-port_in("puerto_entrada1")
-port_in("puerto_entrada2", 23)
-port_in("puerto_entrada3", 23, invert=1)
-port_in("puerto_entrada4", bits=4, LSB=2)
-port_out("puerto_salida")
-port_inout("puerto_entrada_salida")
+v.generic("generico", "integer", 32)
+v.port_in("puerto_entrada1")
+v.port_in("puerto_entrada2", 23)
+v.port_in("puerto_entrada3", 23, invert=1)
+v.port_in("puerto_entrada4", bits=4, LSB=2)
+v.port_out("puerto_salida")
+v.port_inout("puerto_entrada_salida")
 v.signal("senal", 8)
 ```
 Equivalente:
@@ -85,6 +92,9 @@ use ieee.std_logic_1164.all;
 use iee.numeric_std.all;
 
 entity Prueba is
+generic(
+    generico : integer := 32
+);
 port(
     puerto_entrada1 : in std_logic;
     puerto_entrada2 : in std_logic_vector(22 downto 0);
