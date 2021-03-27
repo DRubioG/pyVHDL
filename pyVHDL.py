@@ -20,6 +20,7 @@ compondrán el fichero vhdl
         self.generics=[]
         self.constants=[]
         self.inoutPorts=[]
+        self.processes=[]
 
     def library(self, library=None):
         '''
@@ -182,8 +183,11 @@ compondrán el fichero vhdl
             type="unsigned"
         self.list_ports(signal, self.signals, bits, MSB, LSB, invert, type)
 
-    def generic(self, constant, type="integer", value=None):
-        self.generics.append([constant, type, value])
+    def generic(self, name, type="integer", value=None):
+        self.generics.append([name, type, value])
+
+    def _process(self, proces):
+        self.processes.append(proces)
 
     def nameVHDL(self, name=None):
         if name is None:
@@ -207,20 +211,31 @@ compondrán el fichero vhdl
     def constant(self, name, bits, value, type="unsigned"):
         self.constants.append([name, type, bits, value])
 
+    
+
     #Convertir el codigo VHDL
     def conv_library(self):
+        ''' Metodo para convertir la lista de library en codigo VHDL
+
+        '''
         wLib=""
         for i in range(len(self.libraries)):
             wLib=wLib+"library "+self.libraries[i]+"\n"
         return wLib
 
     def conv_uses(self):
+        ''' Metodo para convertir la lista de uses en codigo VHDL
+
+        '''
         wUse=""
         for i in range(len(self.uses)):
             wUse = wUse + "use " + str(self.uses[i][1]) + "." + str(self.uses[i][0]) + "." + str(self.uses[i][2]) + ";\n"
         return wUse
 
     def conv_ports(self):
+        ''' Metodo para convertir la lista de puertos en codigo VHDL
+
+        '''
         wPort="\nport("
         lonEnt=len(self.inPorts)
         lonSal=len(self.outPorts)
@@ -244,7 +259,7 @@ compondrán el fichero vhdl
             if self.outPorts[i][2]==self.outPorts[i][3]:
                 wPort=wPort+"\n\t"+self.outPorts[i][0]+ " : out " + self.outPorts[i][1] 
             else:
-                wPort+="\n\t"+self.outPorts[i][0]+ " : out " + str(self.outPorts[i][1])+ "(" + str(self.outPorts[i][2])
+                wPort+="\n\t"+self.outPorts[i][0]+ chr(27)+"[1;33m"+" : out " + str(self.outPorts[i][1])+ "(" + str(self.outPorts[i][2])
                 if self.outPorts[i][2]>self.outPorts[i][3]:
                     wPort+=" downto "
                 else:
@@ -257,7 +272,7 @@ compondrán el fichero vhdl
             if self.inoutPorts[i][2]==self.inoutPorts[i][3]:
                 wPort=wPort+"\n\t"+self.inoutPorts[i][0]+ " : inout " + self.inoutPorts[i][1] 
             else:
-                wPort+="\n\t"+self.inoutPorts[i][0]+ " : inout " + str(self.inoutPorts[i][1])+ "(" + str(self.inoutPorts[i][2])
+                wPort+="\n\t"+self.inoutPorts[i][0]+ chr(27)+"[1;33m"+" : inout " + str(self.inoutPorts[i][1])+ "(" + str(self.inoutPorts[i][2])
                 if self.inoutPorts[i][2]>self.inoutPorts[i][3]:
                     wPort+=" downto "
                 else:
@@ -269,6 +284,9 @@ compondrán el fichero vhdl
         return wPort
 
     def conv_signal(self):
+        ''' Metodo para convertir la lista de signals en codigo VHDL
+
+        '''
         if self.signals is not None:
             wSignal=""
             for i in range(len(self.signals)):
@@ -285,6 +303,9 @@ compondrán el fichero vhdl
         return wSignal
 
     def conv_generic(self):
+        ''' Metodo para convertir la lista de generics en codigo VHDL
+
+        '''
         if self.generics is not None:
             wGen="generic("
             lonGen=len(self.generics)
@@ -298,6 +319,9 @@ compondrán el fichero vhdl
         return wGen
 
     def conv_constant(self):
+        ''' Metodo para convertir la lista de constants en codigo VHDL
+
+        '''
         wCons=""
         for i in range(len(self.constants)):
             wCons+="\nconstant "+ self.constants[i][0] + " : " + self.constants[i][1]
@@ -309,19 +333,48 @@ compondrán el fichero vhdl
         return wCons
 
     def conv_entity(self):
+        ''' Metodo para convertir la lista de entity en codigo VHDL
+
+        '''
         if self.entity is None:
             self.nameVHDL()
         wEntity="entity "+ self.entity + " is\n"  + self.conv_generic() + self.conv_ports() + "\nend entity " + self.entity +";\n"
         return wEntity
 
     def conv_architecture(self):
-        wArch="architecture " + self.architecture + " of " + self.entity +  " is " + self.conv_signal()+  self.conv_constant()+ "\nbegin" + "\nend architecture;"
+        ''' Metodo para convertir la lista de architecture en codigo VHDL
+
+        '''
+        wArch="architecture " + self.architecture + " of " + self.entity +  " is " + self.conv_signal()+  self.conv_constant()+ "\nbegin" +self.conv_process()+"\nend architecture;"
         return wArch
 
     def conv_VHDL(self):
+        ''' Metodo para convertir todo en codigo VHDL
+
+        '''
         wVHDL=self.conv_library()+self.conv_uses()+self.conv_entity()+"\n"+self.conv_architecture()
         return wVHDL
 
+    def conv_process(self):
+        ''' Metodo para convertir la lista de process en codigo VHDL
+
+        '''
+        wProc="\n"
+        for i in self.processes:
+            wProc+=i
+           # print("\nLetra" + wProc)
+            #if i==';':
+            #    print("\npunto y coma")
+            #    wProc+="\n"
+          #  if wProc==";":
+               #  print("punto y coma")
+            
+            
+            wProc=wProc.replace("process", "\tprocess")
+            wProc=wProc.replace("begin", "\n\tbegin\n\t\t")
+            wProc=wProc.replace("then", "then\n\t")
+            wProc=wProc.replace(";", ";\n")
+        return wProc
 
 if __name__=="__main__":
     v=pyVHDL("PWM_generator.vhd")
@@ -336,4 +389,27 @@ if __name__=="__main__":
     v.constant("cero", 23, 0)
     v.signal("senal_portadora", 23) 
     v.signal("final_pwm_int")
+    v._process("process( clk, hab_pwm)\
+variable cont:unsigned(23 downto 0);\
+begin\
+if(rising_edge(clk))then\
+if(rst='0')then\
+cont:=(others=>'0');\
+final_pwm_int<='0';\
+elsif(hab_pwm='1')then\
+final_pwm_int<='0';\
+if(cont=cero)then\
+final_pwm_int<='1';\
+cont:=unsigned(periodo)+1;\
+end if;\
+cont:=cont-1;\
+elsif (hab_pwm='0') then\
+cont:=(others=>'0');\
+final_pwm_int<='0';\
+end if;\
+end if;")
+   # print(v.processes)
+   # print("conversion\n")
+   # print(v.conv_process())
     print(v.conv_VHDL())
+    
