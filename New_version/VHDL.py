@@ -1,5 +1,11 @@
 import os
 
+class VHDL:
+    def __init__(self, document):
+        self.document=document
+
+        self.name_document=
+
 vhd_files=[]
 y=[]
 objeto=os.listdir()
